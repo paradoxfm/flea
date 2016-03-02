@@ -1,0 +1,12 @@
+package ru.megazlo.flea.entity;
+
+import org.springframework.data.jpa.domain.AbstractPersistable;
+
+import javax.persistence.Entity;
+
+/**
+ * @author iv - 23.01.2016
+ */
+@Entity
+public class Event extends AbstractPersistable<Long> {
+}
