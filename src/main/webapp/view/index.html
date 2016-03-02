@@ -78,7 +78,7 @@
         <strong>You are in debug mode!</strong>
     </div>
 
-    <script type="text/javascript" th:src="@{/js/jquery-2.2.0.js}"></script>
+    <script type="text/javascript" th:src="@{/js/jquery-2.2.1.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <script type="text/javascript" th:src="@{/js/angular.js}"></script>
     <script type="text/javascript" th:src="@{/js/angular-ui-router.js}"></script>
@@ -99,7 +99,7 @@
     <script th:src="@{/appjs/html5imageupload.js}"></script>
 </th:block>
 <th:block th:unless="${T(ru.megazlo.flea.utils.GlobalUtil).isDebug()}">
-    <script th:src="@{/js/static.min.js}" type="text/javascript"></script>
+    <script th:src="@{/js/static.min.js(v=#{app.ver})}" type="text/javascript"></script>
     <script th:src="@{/js/app_site.min.js}" type="text/javascript"></script>
     <script th:src="@{//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js}"></script>
 </th:block>

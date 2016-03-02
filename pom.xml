@@ -6,7 +6,7 @@
 
     <groupId>ru.megazlo</groupId>
     <artifactId>flea</artifactId>
-    <version>0.2-preview</version>
+    <version>alfa_1</version>
     <packaging>war</packaging>
 
     <properties>
@@ -29,14 +29,10 @@
         <!-- версии дрйверов для db -->
         <postgre.ver>9.4.1208.jre7</postgre.ver>
         <h2.ver>1.4.191</h2.ver>
-    </properties>
 
-    <scm>
-        <connection>scm:svn:http://127.0.0.1/dummy</connection>
-        <developerConnection>scm:svn:https://127.0.0.1/dummy</developerConnection>
-        <tag>HEAD</tag>
-        <url>http://127.0.0.1/dummy</url>
-    </scm>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyyMMddHHmmss</maven.build.timestamp.format>
+    </properties>
 
     <dependencies>
         <dependency>
@@ -293,12 +289,20 @@
     </dependencies>
 
     <build>
-        <finalName>${project.artifactId}_${project.version}_${buildNumber}</finalName>
+        <finalName>${project.artifactId}_${maven.build.timestamp}</finalName>
+
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.5</version>
+                <version>3.5.1</version>
                 <configuration>
                     <source>${java.ver}</source>
                     <target>${java.ver}</target>
@@ -313,27 +317,6 @@
                     <parallel>classes</parallel>
                     <forkMode>perthread</forkMode>
                     <threadCount>4</threadCount>
-                </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.4</version>
-                <executions>
-                    <execution>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>create</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <revisionOnScmFailure>true</revisionOnScmFailure>
-                    <format>{0,number}</format>
-                    <items>
-                        <item>buildNumber</item>
-                    </items>
                 </configuration>
             </plugin>
 
@@ -373,7 +356,7 @@
                             <jsSourceDir>static/js</jsSourceDir>
                             <jsFinalFile>static.js</jsFinalFile>
                             <jsSourceFiles>
-                                <jsSourceFile>jquery-2.2.0.js</jsSourceFile>
+                                <jsSourceFile>jquery-2.2.1.js</jsSourceFile>
                                 <jsSourceFile>bootstrap.js</jsSourceFile>
                                 <jsSourceFile>angular.js</jsSourceFile>
                                 <jsSourceFile>angular-ui-router.js</jsSourceFile>
