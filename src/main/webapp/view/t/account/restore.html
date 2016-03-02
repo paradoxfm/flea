@@ -1,0 +1,18 @@
+<div class="mask"></div>
+<form ng-controller="LoginController" ng-submit="restore()" class="loginForm" style="width: 250px;"
+      xmlns:th="http://www.thymeleaf.org">
+    <div class="form-group">
+        <input type="text" name="email" class="form-control input-sm" ng-model="restoreInfo.email" th:placeholder="#{form.restore.email}" title=""/>
+    </div>
+    <div class="form-group">
+        <div class="pull-right">
+            <input type="submit" class="brn btn-success btn-sm" th:value="#{form.restore.btn.restore}"/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div>
+        <span th:text="#{form.restore.haveAcc}"></span>
+        <a ui-sref="user_login" th:text="#{form.restore.signIn}"></a>
+    </div>
+    <!--<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>-->
+</form>

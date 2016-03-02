@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <statusListener class="ch.qos.logback.core.status.NopStatusListener" />
+    <!-- TRACE, DEBUG, INFO, WARN, ERROR, ALL or OFF. уровни логирования по нарастающи -->
+
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                <!--at ru.megazlo.web.controller.SampleController.helloWorld(SampleController.java:27)-->
+                <!-- доп опции [%thread]  -->
+                %d{HH:mm:ss.SS} %-5level \(%file:%line\) -> %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <logger name="com.platifon" level="fatal" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <root level="warn">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>

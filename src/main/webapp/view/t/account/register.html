@@ -1,0 +1,27 @@
+<div class="mask"></div>
+<form ng-controller="LoginController" class="loginForm" ng-submit="register()" style="width: 250px;"
+      xmlns:th="http://www.thymeleaf.org">
+    <div class="form-group">
+        <input type="text" name="username" ng-model="regInfo.username" class="form-control input-sm" th:placeholder="#{form.register.name}" title=""/>
+    </div>
+    <div class="form-group">
+        <input type="text" name="email" ng-model="regInfo.email" class="form-control input-sm" th:placeholder="#{form.register.email}" title=""/>
+    </div>
+    <div class="form-group">
+        <input type="password" name="password" ng-model="regInfo.password" class="form-control input-sm" th:placeholder="#{form.register.password}" title=""/>
+    </div>
+    <div class="form-group">
+        <input type="password" name="confirmPassword" ng-model="regInfo.confirmPassword" class="form-control input-sm"
+               th:placeholder="#{form.register.confirmPassword}" title=""/>
+    </div>
+    <div class="form-group">
+        <div class="pull-right">
+            <input type="submit" class="brn btn-success btn-sm" th:value="#{form.register.btn.register}"/>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div>
+        <span th:text="#{form.register.haveAcc}"></span>
+        <a ui-sref="user_login" th:text="#{form.register.signIn}"></a>
+    </div>
+</form>

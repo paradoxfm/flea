@@ -1,0 +1,25 @@
+<div class="mask"></div>
+<form ng-controller="LoginController" ng-submit="login()" class="loginForm" style="width: 250px;"
+      xmlns:th="http://www.thymeleaf.org">
+    <div class="form-group">
+        <input type="text" name="username" ng-model="userCred.username" class="form-control input-sm" th:placeholder="#{form.login.name}" title=""/>
+    </div>
+    <div class="form-group">
+        <input type="password" name="password" ng-model="userCred.password" class="form-control input-sm" th:placeholder="#{form.login.password}" title=""/>
+    </div>
+    <div class="form-group">
+        <div class="pull-left checkbox_xs">
+            <input type="checkbox" id="rememberMeId" name="rememberMe" ng-model="userCred.rememberMe"/>
+            <label for="rememberMeId" th:text="#{form.login.rememberMe}"></label>
+        </div>
+        <div class="pull-right">
+            <input type="submit" class="brn btn-success btn-sm" th:value="#{form.login.btn.signIn}" />
+        </div>
+        <div class="clearfix"></div>
+    </div>
+    <div>
+        <span th:text="#{form.login.noAccount}"></span> <a ui-sref="user_register" th:text="#{form.login.btn.register}"></a>
+        <br/>
+        <a ui-sref="user_restore" th:text="#{form.login.restorePassword}"></a>
+    </div>
+</form>

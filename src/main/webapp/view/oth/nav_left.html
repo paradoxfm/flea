@@ -1,0 +1,74 @@
+<!-- Left side column. contains the logo and sidebar -->
+<aside class="main-sidebar" xmlns:th="http://www.thymeleaf.org">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+            <div class="pull-left image">
+                <img src="/img/tmp/user_160_160.jpg" class="img-circle" alt="User Image"/>
+            </div>
+            <div class="pull-left info">
+                <p>Ivan Gurkin</p>
+                <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+            </div>
+        </div>
+        <!-- search form -->
+        <form action="#" method="get" class="sidebar-form">
+            <div class="input-group input-group-sm">
+                <input type="text" name="q" class="form-control" placeholder="Search..."/>
+              <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i></button>
+              </span>
+            </div>
+        </form>
+        <!-- /.search form -->
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+            <li class="header">MAIN NAVIGATION</li>
+            <li>
+                <a ui-sref="card_list_contact">
+                    <i class="fa fa-th"></i> <span th:text="#{menu.left.allCards}"></span>
+                    <small class="label pull-right bg-green">new</small>
+                </a>
+            </li>
+            <li class="treeview">
+                <a ui-sref="card_list_owner">
+                    <i class="fa fa-dashboard"></i> <span th:text="#{menu.left.myCards}"></span>
+                </a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-share"></i> <span>Multilevel</span>
+                    <i class="fa fa-angle-left pull-right"></i>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                    <li>
+                        <a href="#"><i class="fa fa-circle-o"></i> Level One <i class="fa fa-angle-left pull-right"></i></a>
+                        <ul class="treeview-menu">
+                            <li><a href="#"><i class="fa fa-circle-o"></i> Level Two</a></li>
+                            <li>
+                                <a href="#"><i class="fa fa-circle-o"></i> Level Two <i class="fa fa-angle-left pull-right"></i></a>
+                                <ul class="treeview-menu">
+                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                    <li><a href="#"><i class="fa fa-circle-o"></i> Level Three</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><a href="#"><i class="fa fa-circle-o"></i> Level One</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="documentation/index.html">
+                    <i class="fa fa-book"></i> <span>Documentation</span>
+                </a>
+            </li>
+            <li class="header" th:text="#{menu.left.labels}"></li>
+            <li><a href="#"><i class="fa fa-circle-o text-aqua"></i> <span th:text="#{menu.left.labels.info}"></span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-red"></i> <span th:text="#{menu.left.labels.important}"></span></a></li>
+            <li><a href="#"><i class="fa fa-circle-o text-yellow"></i> <span th:text="#{menu.left.labels.warn}"></span></a></li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>

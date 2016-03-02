@@ -1,0 +1,76 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <section class="content-header">
+        <h4 th:text="#{view.card.editor.title}"></h4>
+    </section>
+    <div class="col-sm-12">
+        <!--  th:text="#{view.card.editor.default}" -->
+        <form action="/s/s">
+            <div class="card-wrap">
+                <div class="draggable text-field">
+                    Email: paradoxfm@mail.ru
+                </div>
+                <div class="draggable text-field">
+                    Телефон: +7 (904) 164-08-74
+                </div>
+                <div class="draggable text-field">
+                    Гуркин Иван Александрович
+                </div>
+
+                <div id="cardBodyId" class="dropzone card-body" data-ajax="false"
+                     data-ghost="false" data-canvas="false">
+                    <input type="file" name="thumb"/>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        $(function () {
+            $('#cardBodyId').html5imageupload();
+
+            interact('.draggable').resizable({
+                preserveAspectRatio: true,
+                edges: {left: false, right: true, bottom: false, top: false}
+            }).draggable({
+                // enable inertial throwing
+                inertia: true,
+                snap: {
+                    targets: [
+                        interact.createSnapGrid({x: 5, y: 5})
+                    ],
+                    range: Infinity,
+                    relativePoints: [{x: 0, y: 0}]
+                },
+                // keep the element within the area of it's parent
+                restrict: {
+                    restriction: "parent",
+                    endOnly: false,
+                    elementRect: {top: 0, left: 0, bottom: 1, right: 1}
+                },
+                // enable autoScroll
+                // autoScroll: true,
+
+                // call this function on every dragmove event
+                onmove: dragMoveListener,
+                // call this function on every dragend event
+                onend: function (event) {
+                }
+            });
+
+            function dragMoveListener(event) {
+                var target = event.target,
+                // keep the dragged position in the data-x/data-y attributes
+                        x = (parseFloat(target.getAttribute('data-x')) || 0) + event.dx,
+                        y = (parseFloat(target.getAttribute('data-y')) || 0) + event.dy;
+
+                // translate the element
+                target.style.webkitTransform =
+                        target.style.transform = 'translate(' + x + 'px, ' + y + 'px)';
+
+                // update the posiion attributes
+                target.setAttribute('data-x', x);
+                target.setAttribute('data-y', y);
+            }
+        });
+    </script>
+</div>

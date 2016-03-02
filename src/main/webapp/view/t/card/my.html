@@ -1,0 +1,13 @@
+<div xmlns:th="http://www.thymeleaf.org">
+    <section class="content-header">
+        <h4 th:text="#{view.card.my.title}"></h4>
+
+        <a class="btn-floating btn-large def-color btn-find-contact" ui-sref="create_new_card" th:title="#{view.card.my.add.title}">
+            <i class="fa fa-fw fa-lg fa-plus"></i>
+        </a>
+    </section>
+    <div class="clearfix"></div>
+
+
+    <th:block th:include="t/card/item"/>
+</div>
