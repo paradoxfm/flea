@@ -65,15 +65,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/fonts/**", "/t/**", "/appjs/**", "/css/**", "/js/**", "/img/**", "/favicon.ico");
+        web.ignoring().antMatchers("/fonts/**", "/t/**", "/app/**", "/css/**", "/js/**", "/img/**", "/favicon.ico");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/intro**", "/login/**", "/user/**").permitAll()
-                //.antMatchers("/intro**", "/login/**", "/user/**", "/fonts/**", "/t/**", "/appjs/**", "/css/**", "/js/**", "/img/**", "/favicon.ico").permitAll()
-                .anyRequest().authenticated()
+                .antMatchers("/**").permitAll()
+                .antMatchers("/api/user/**").authenticated()
 
                 .and().formLogin().loginPage("/intro").loginProcessingUrl("/auth/login_check")//.defaultSuccessUrl("/", false).failureUrl("/intro?error")
                 .failureHandler((req, resp, e) -> resp.sendError(HttpServletResponse.SC_UNAUTHORIZED, "login failure"))//эта приколюха для anguarjs

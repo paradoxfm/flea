@@ -43,8 +43,8 @@ public class Web extends WebMvcConfigurerAdapter implements ApplicationContextAw
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry reg) {
-        reg.addResourceHandler("/fonts/**", "/tmp/**", "/appjs/**", "/css/**", "/js/**", "/img/**", "/favicon.ico")
-                .addResourceLocations("/static/fonts/", "/static/tmp/", "/static/appjs/", "/static/css/", "/static/js/", "/static/img/", "/static/img/favicon.ico")
+        reg.addResourceHandler("/fonts/**", "/tmp/**", "/app/**", "/css/**", "/js/**", "/img/**", "/favicon.ico")
+                .addResourceLocations("/static/fonts/", "/static/tmp/", "/static/app/", "/static/css/", "/static/js/", "/static/img/", "/static/img/favicon.ico")
                 .setCachePeriod(BROWSER_CACHE_CONTROL_WEEK).resourceChain(true).addResolver(new GzipResourceResolver());
     }
 

@@ -5,8 +5,8 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>ru.megazlo</groupId>
-    <artifactId>flea</artifactId>
-    <version>alfa_1</version>
+    <artifactId>eflea</artifactId>
+    <version>BETA-1.0</version>
     <packaging>war</packaging>
 
     <properties>
@@ -330,7 +330,7 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                     <archive>
                         <manifestEntries>
-                            <Implementation-Build>${buildNumber}</Implementation-Build>
+                            <Implementation-Build>${maven.build.timestamp}</Implementation-Build>
                         </manifestEntries>
                     </archive>
                 </configuration>
