@@ -4,13 +4,13 @@
     <meta charset="utf-8"/>
     <meta name="description" content="Parallax backgrounds with centered content"/>
     <title>Деловые визитки начальная страница</title>
-    <th:block th:if="${T(com.platifon.mycards.utils.GlobalUtil).isDebug()}">
+    <th:block th:if="${T(ru.megazlo.flea.utils.GlobalUtil).isDebug()}">
         <link th:href="@{/css/st/bootstrapLog.css}" rel="stylesheet"/>
         <link th:href="@{/css/st/parallax.css}" rel="stylesheet"/>
         <link th:href="@{/css/st/loading-bar.css}" rel="stylesheet"/>
         <link th:href="@{/css/loginInit.css}" rel="stylesheet"/>
     </th:block>
-    <th:block th:unless="${T(com.platifon.mycards.utils.GlobalUtil).isDebug()}">
+    <th:block th:unless="${T(ru.megazlo.flea.utils.GlobalUtil).isDebug()}">
 
     </th:block>
 </head>
@@ -82,7 +82,7 @@
     </div>
 </div>
 
-<th:block th:if="${T(com.platifon.mycards.utils.GlobalUtil).isDebug()}">
+<th:block th:if="${T(ru.megazlo.flea.utils.GlobalUtil).isDebug()}">
     <script type="text/javascript" th:src="@{/js/jquery-2.2.0.js}"></script>
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
     <script type="text/javascript" th:src="@{/js/angular.js}"></script>
@@ -96,7 +96,7 @@
     <script type="text/javascript" th:src="@{/appjs/route-login.js}"></script>
     <script type="text/javascript" th:src="@{/js/parallax.js}"></script>
 </th:block>
-<th:block th:unless="${T(com.platifon.mycards.utils.GlobalUtil).isDebug()}">
+<th:block th:unless="${T(ru.megazlo.flea.utils.GlobalUtil).isDebug()}">
     <script type="text/javascript" th:src="@{/js/static.min.js?b=${buildNumber}}"></script>
     <script type="text/javascript" th:src="@{/js/app_login.min.js?b=${buildNumber}}"></script>
 </th:block>
