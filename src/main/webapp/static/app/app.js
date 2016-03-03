@@ -1,10 +1,8 @@
-var cardApp = angular.module('cardApp', ['ngAnimate', 'ui.router', 'angular-loading-bar'/*, 'cardControllers'*/]);
+var fleApp = angular.module('fleApp', ['ngAnimate', 'ui.router', 'angular-loading-bar'/*, 'cardControllers'*/]);
 
-cardApp.config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
+fleApp.config(['$locationProvider', 'cfpLoadingBarProvider', function ($locationProvider, cfpLoadingBarProvider) {
     cfpLoadingBarProvider.includeSpinner = false;
-}]);
 
-cardApp.config(['$locationProvider', function ($locationProvider) {
     $locationProvider.html5Mode({
         enabled: true,
         requireBase: false,
@@ -13,6 +11,6 @@ cardApp.config(['$locationProvider', function ($locationProvider) {
     //$locationProvider.hashPrefix('!');
 }]);
 
-cardApp.run(['$state', function($state) {
-    $state.go('card_list_contact');
+fleApp.run(['$state', function($state) {
+    //$state.go('card_list_contact');
 }]);
