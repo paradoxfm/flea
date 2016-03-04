@@ -4,6 +4,10 @@ html, body {
     height: 100%;
 }
 
+.top-header {
+    padding: 10px;
+}
+
 .footer-wrap, .header-wrap {
     width: 100%;
 }
@@ -11,6 +15,8 @@ html, body {
 .footer-wrap {
     position: absolute;
     bottom: 0;
+    width: 980px;
+    margin: auto;
 }
 
 .wrapper {

@@ -1,7 +1,7 @@
 <div class="header-wrap" xmlns:th="http://www.thymeleaf.org"
      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 
-    <div>
+    <div class="top-header">
         <div class="pull-left"></div>
         <div class="pull-right">
             <th:block sec:authorize="isAuthenticated()">
@@ -17,8 +17,8 @@
 
     <div class="panel panel-primary" style="padding: 3px">
         <form class="form-horizontal">
-            <div class="input-group">
-                <select id="categorySelId" class="selectpicker" data-width="220px" title="">
+            <div class="input-group input-group-sm">
+                <select id="categorySelId" class="selectpicker" data-width="220px" data-show-tick="true" data-live-search="true" title="">
                     <option>Любая категория</option>
                 </select>
                 <input type="text" placeholder="" class="form-control"/>
