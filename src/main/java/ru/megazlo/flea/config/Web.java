@@ -1,5 +1,7 @@
 package ru.megazlo.flea.config;
 
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import ru.megazlo.flea.components.GitInterceptor;
 import ru.megazlo.flea.utils.GlobalUtil;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +43,9 @@ public class Web extends WebMvcConfigurerAdapter implements ApplicationContextAw
     @Qualifier("localValidator")
     private Validator localValidator;
 
+	@Autowired
+	private GitInterceptor gitInterceptor;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry reg) {
         reg.addResourceHandler("/fonts/**", "/tmp/**", "/app/**", "/css/**", "/js/**", "/img/**", "/favicon.ico")
@@ -48,7 +53,14 @@ public class Web extends WebMvcConfigurerAdapter implements ApplicationContextAw
                 .setCachePeriod(BROWSER_CACHE_CONTROL_WEEK).resourceChain(true).addResolver(new GzipResourceResolver());
     }
 
-    /*@Override
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		super.addInterceptors(registry);
+		registry.addInterceptor(gitInterceptor);
+	}
+
+
+	/*@Override
     public void configureContentNegotiation(ContentNegotiationConfigurer configurer) {
         configurer.favorPathExtension(true)
                 .useJaf(false)

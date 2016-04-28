@@ -12,20 +12,20 @@
     <properties>
         <java.ver>1.8</java.ver>
         <junit.ver>4.12</junit.ver>
-        <mockito.ver>2.0.43-beta</mockito.ver>
-        <lombok.ver>1.16.6</lombok.ver>
+        <mockito.ver>2.0.52-beta</mockito.ver>
+        <lombok.ver>1.16.8</lombok.ver>
         <servlet.ver>3.1.0</servlet.ver>
 
         <spring.ver>4.2.5.RELEASE</spring.ver>
         <security.ver>4.0.4.RELEASE</security.ver>
-        <datajpa.ver>1.9.4.RELEASE</datajpa.ver>
-        <thymeleaf.ver>3.0.0.BETA02</thymeleaf.ver>
+        <datajpa.ver>1.10.1.RELEASE</datajpa.ver>
+        <thymeleaf.ver>3.0.0.BETA03</thymeleaf.ver>
         <hibernate.ver>5.1.0.Final</hibernate.ver>
         <jackson.ver>2.6.5</jackson.ver>
         <hibernate.valid.ver>5.2.4.Final</hibernate.valid.ver>
         <scribejava.ver>2.3.0</scribejava.ver>
-        <slf4j.ver>1.7.16</slf4j.ver>
-        <logback.ver>1.1.5</logback.ver>
+        <slf4j.ver>1.7.21</slf4j.ver>
+        <logback.ver>1.1.7</logback.ver>
         <!-- версии дрйверов для db -->
         <postgre.ver>9.4.1208.jre7</postgre.ver>
         <h2.ver>1.4.191</h2.ver>
@@ -346,13 +346,13 @@
                         <phase>compile</phase>
                         <configuration>
                             <charset>UTF-8</charset>
-                            <cssSourceDir>static/css/st</cssSourceDir>
+                            <!--<cssSourceDir>static/css/st</cssSourceDir>
                             <cssFinalFile>site.css</cssFinalFile>
                             <cssSourceIncludes>
                                 <cssSourceInclude>bootstrap.css</cssSourceInclude>
                                 <cssSourceInclude>font-awesome.css</cssSourceInclude>
                                 <cssSourceInclude>loading-bar.css</cssSourceInclude>
-                            </cssSourceIncludes>
+                            </cssSourceIncludes>-->
                             <jsSourceDir>static/js</jsSourceDir>
                             <jsFinalFile>static.js</jsFinalFile>
                             <jsSourceFiles>
@@ -383,7 +383,7 @@
                             <jsSourceDir>static</jsSourceDir>
                             <jsFinalFile>js/app_site.js</jsFinalFile>
                             <jsSourceFiles>
-                                <jsSourceFile>appjs/app.js</jsSourceFile>
+                                <jsSourceFile>app/app.js</jsSourceFile>
                                 <jsSourceFile>js/theme/app.js</jsSourceFile>
                                 <jsSourceFile>js/theme/demo.js</jsSourceFile>
                             </jsSourceFiles>
@@ -409,10 +409,10 @@
                             <jsSourceFiles>
                                 <jsSourceFile>js/parallax.js</jsSourceFile>
 
-                                <jsSourceFile>appjs/appLog.js</jsSourceFile>
-                                <jsSourceFile>appjs/user_controller.js</jsSourceFile>
-                                <jsSourceFile>appjs/user_service.js</jsSourceFile>
-                                <jsSourceFile>appjs/route-login.js</jsSourceFile>
+                                <jsSourceFile>app/appLog.js</jsSourceFile>
+                                <jsSourceFile>app/user_controller.js</jsSourceFile>
+                                <jsSourceFile>app/user_service.js</jsSourceFile>
+                                <jsSourceFile>app/route-login.js</jsSourceFile>
                             </jsSourceFiles>
                             <jsEngine>CLOSURE</jsEngine>
                         </configuration>
@@ -423,6 +423,36 @@
                 </executions>
             </plugin>
 
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>2.2.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+
+                <configuration>
+                    <prefix>git</prefix>
+                    <dateFormat>dd.MM.yyyy</dateFormat>
+                    <verbose>true</verbose>
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <skipPoms>true</skipPoms>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <generateGitPropertiesFilename>src/main/resources/git.properties</generateGitPropertiesFilename>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <gitDescribe>
+                        <skip>false</skip>
+                        <always>false</always>
+                        <abbrev>7</abbrev>
+                        <dirty>-dirty</dirty>
+                        <forceLongFormat>false</forceLongFormat>
+                    </gitDescribe>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

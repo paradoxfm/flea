@@ -2,3 +2,4 @@
 /.idea
 /*.iml
 /buildNumber.properties
+/src/main/resources/git.properties
