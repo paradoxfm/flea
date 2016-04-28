@@ -1,4 +1,5 @@
-# flea
+# flea market
+![flea](https://s3.mzstatic.com/us/r30/Purple7/v4/f9/e3/18/f9e3181c-d4b1-e100-1c1a-de047ce0857c/icon175x175.png)
 #### java code for flea market :pray:
 
 * для работы проекта необходимо:
