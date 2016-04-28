@@ -44,7 +44,7 @@ public class SpringDataJpa {
         try {
             Context initCtx = new InitialContext();
             Context envCtx = (Context) initCtx.lookup("java:comp/env");//jndi в tomcat_home/conf/context.xml
-            return  (DataSource) envCtx.lookup("jdbc/mycards");
+            return  (DataSource) envCtx.lookup("jdbc/flea");
         } catch (NamingException ignored) {
         }
         return null;
