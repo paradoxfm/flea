@@ -1,14 +1,14 @@
 # flea
-java code for flea market :pray:
-
+#### java code for flea market :pray:
+---
 * для работы проекта необходимо:
-    - java >= 1.8
-    - бд postgresql >= 9.4
-    - apache tomcat >= 8
+    - [java](http://www.oracle.com/technetwork/java/javase/downloads/index.html) >= 1.8
+    - бд [postgresql](http://www.postgresql.org/) >= 9.4
+    - [apache tomcat](https://tomcat.apache.org/) >= 8
     - прописать настройки подключения. их можно взять из класса [SpringDataJpa](src/main/java/ru/megazlo/flea/config/SpringDataJpa.java)
     - для разработки
-    - IDE Idea
-    - maven  >= 3.3
+    - IDE Idea или Eclipse
+    - [maven](https://maven.apache.org/)  >= 3.3
 
 * перед запуском проекта на tomcat надо собрать проект maven, чтоб появился [git.properties](src/main/resources/git.properties)
 
@@ -38,9 +38,7 @@ java code for flea market :pray:
 
 * для развертывания рабочей версии с большой нагрузкой надо в hibernate.properties настроить пул подключений `c3p0`
 
-* при запуске в режиме дебага в
-    ``` InitService.addAdminIfNeed() ```
-  создается пользователь по умолчанию. з.ы. там можно посмотреть логин и пароль
+* при запуске в режиме дебага в `InitService.addAdminIfNeed()` создается пользователь по умолчанию. з.ы. там можно посмотреть логин и пароль
 
 * сессия пользователя хранится в бд, так что при перезагрузке сервера авторизация не слетает
 для этого есть сущность `PersistentRememberMeTokenDb` и с помощью магии она сохраяется в базе
@@ -52,5 +50,5 @@ java code for flea market :pray:
         <Connector SSLEnabled="true" keystoreFile="C:\projects\keys\my.keystore" protocol="org.apache.coyote.http11.Http11NioProtocol"
               keystorePass="123456" maxThreads="150" port="8443" scheme="https" secure="true" sslProtocol="TLS"/>
     ```
-    в application.properties установить свойство application.use.ssl
+    в application.properties установить свойство `application.use.ssl`
     запуск приложения будет происходить на порту `8443`, следовательо надо добавить конфигурацию запуска
