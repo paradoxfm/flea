@@ -5,14 +5,16 @@ java code for flea market :pray:
     - java >= 1.8
     - бд postgresql >= 9.4
     - apache tomcat >= 8
-    - прописать настройки подключения. их можно взять из класса SpringDataJpa
+    - прописать настройки подключения. их можно взять из класса [SpringDataJpa](src/main/java/ru/megazlo/flea/config/SpringDataJpa.java)
     - для разработки
     - IDE Idea
     - maven  >= 3.3
 
+* перед запуском проекта на tomcat надо собрать проект maven, чтоб появился [git.properties](src/main/resources/git.properties)
+
 * для генерации бд необходимо:
     - создать базу в postgresql
-    - раскомментировать в файле `hibernate.properties` свойство hibernate.hbm2ddl.auto=create
+    - раскомментировать в файле [hibernate.properties](src/main/resources/hibernate.properties) свойство hibernate.hbm2ddl.auto=create
 
 * подключение к бд настраивается через jndi в tomcat `tomcat_home/conf/context.xml`
     добавить настройки
@@ -34,21 +36,21 @@ java code for flea market :pray:
             mail.smtp.starttls.enable="true"/>
      ```
 
-* для развертывания рабочей версии с большой нагрузкой надо в hibernate.properties настроить пул подключений c3p0
+* для развертывания рабочей версии с большой нагрузкой надо в hibernate.properties настроить пул подключений `c3p0`
 
 * при запуске в режиме дебага в
     ``` InitService.addAdminIfNeed() ```
   создается пользователь по умолчанию. з.ы. там можно посмотреть логин и пароль
 
 * сессия пользователя хранится в бд, так что при перезагрузке сервера авторизация не слетает
-для этого есть сущность PersistentRememberMeTokenDb и с помощью магии она сохраяется в базе
+для этого есть сущность `PersistentRememberMeTokenDb` и с помощью магии она сохраяется в базе
 
 * настройка https в tomcat:
-    сгенерировать кейстор keytool.exe -genkey -alias myalias -keyalg RSA -keystore C:\projects\keys\my.keystore
-    добавить в server.xml
+    сгенерировать кейстор `keytool.exe -genkey -alias myalias -keyalg RSA -keystore C:\projects\keys\my.keystore`
+    добавить в `server.xml`
     ```xml
         <Connector SSLEnabled="true" keystoreFile="C:\projects\keys\my.keystore" protocol="org.apache.coyote.http11.Http11NioProtocol"
               keystorePass="123456" maxThreads="150" port="8443" scheme="https" secure="true" sslProtocol="TLS"/>
     ```
     в application.properties установить свойство application.use.ssl
-    запуск приложения будет происходить на порту 8443, следовательо надо добавить конфигурацию запуска
+    запуск приложения будет происходить на порту `8443`, следовательо надо добавить конфигурацию запуска
