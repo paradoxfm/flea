@@ -16,14 +16,14 @@
         <lombok.ver>1.16.8</lombok.ver>
         <servlet.ver>3.1.0</servlet.ver>
 
-        <spring.ver>4.2.5.RELEASE</spring.ver>
-        <security.ver>4.0.4.RELEASE</security.ver>
+        <spring.ver>4.2.6.RELEASE</spring.ver>
+        <security.ver>4.1.0.RELEASE</security.ver>
         <datajpa.ver>1.10.1.RELEASE</datajpa.ver>
-        <thymeleaf.ver>3.0.0.BETA03</thymeleaf.ver>
+        <thymeleaf.ver>3.0.0.RELEASE</thymeleaf.ver>
         <hibernate.ver>5.1.0.Final</hibernate.ver>
         <jackson.ver>2.6.5</jackson.ver>
         <hibernate.valid.ver>5.2.4.Final</hibernate.valid.ver>
-        <scribejava.ver>2.3.0</scribejava.ver>
+        <scribejava.ver>2.5.3</scribejava.ver>
         <slf4j.ver>1.7.21</slf4j.ver>
         <logback.ver>1.1.7</logback.ver>
         <!-- версии дрйверов для db -->
