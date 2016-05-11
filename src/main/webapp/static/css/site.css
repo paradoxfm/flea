@@ -8,6 +8,10 @@ html, body {
     padding: 10px;
 }
 
+.header-wrap hr {
+    margin-top: 10px;
+}
+
 .footer-wrap, .header-wrap {
     width: 100%;
 }

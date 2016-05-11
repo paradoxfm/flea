@@ -16,14 +16,14 @@
     <hr>
 
     <div class="panel panel-primary" style="padding: 3px">
-        <form class="form-horizontal">
+        <form class="form-horizontal" method="get" th:action="@{/}">
             <div class="input-group input-group-sm">
-                <select id="categorySelId" class="selectpicker" data-width="220px" data-show-tick="true" data-live-search="true" title="">
+                <select id="categorySelId" class="selectpicker" data-width="200px" data-show-tick="true" data-live-search="true" title="">
                     <option>Любая категория</option>
                 </select>
                 <input type="text" placeholder="" class="form-control"/>
                 <div class="input-group-btn">
-                    <button class="btn btn-default" type="button">Поехали!</button>
+                    <button class="btn btn-default" type="submit">Поехали!</button>
                 </div>
             </div>
         </form>

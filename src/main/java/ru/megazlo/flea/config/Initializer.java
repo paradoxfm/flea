@@ -8,6 +8,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import javax.servlet.*;
+import javax.servlet.annotation.ServletSecurity;
 import java.util.EnumSet;
 
 /**
@@ -27,6 +28,11 @@ public class Initializer implements WebApplicationInitializer {
         ServletRegistration.Dynamic dispatcher = servletContext.addServlet("DispatcherServlet", new DispatcherServlet(context));
         dispatcher.setLoadOnStartup(1);
         dispatcher.addMapping(MAPPING_URL);
+
+        // HTTPS
+        HttpConstraintElement forceHttpsConstraint = new HttpConstraintElement(ServletSecurity.TransportGuarantee.CONFIDENTIAL);
+        ServletSecurityElement securityElement = new ServletSecurityElement(forceHttpsConstraint);
+        dispatcher.setServletSecurity(securityElement);
     }
 
     private void registerFilters(ServletContext servletContext) {
