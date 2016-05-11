@@ -21,9 +21,6 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import java.util.Properties;
 
-/**
- * @author paradoxfm - 21.01.2016
- */
 @Configuration
 @EnableAsync
 @ComponentScan({"ru.megazlo.flea.services", "ru.megazlo.flea.repositories",

@@ -44,7 +44,7 @@ public class InitService implements IInitService, ApplicationListener<ContextRef
         if (user == null) {
             User admin = new User();
             admin.setEmail("paradoxfm@mail.ru");
-            admin.setLogin("iv");
+            admin.setLogin("ivan");
             admin.setPasswordHash(passwordEncoder.encode("qwe"));
             admin.setName("Иван Гуркин");
             Set<RoleEnum> roles = new HashSet<>();

@@ -1,4 +1,7 @@
+/build
+/out
 /target
+/.gradle
 /.idea
 /*.iml
 /buildNumber.properties
