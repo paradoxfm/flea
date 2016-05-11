@@ -5,7 +5,7 @@ plugins {
 }
 
 group 'ru.megazlo'
-version 'BETA-1.0'
+version 'b2'
 
 apply plugin: 'com.gorylenko.gradle-git-properties'
 apply plugin: 'js'
@@ -82,25 +82,34 @@ gitProperties {
 	gitPropertiesDir = file("${project.rootDir}/src/main/resources/")
 }
 
+compileJava.options.encoding = "UTF-8"
 war.archiveName = 'flea.war'
+
+//сжатие ресурсов в war файл
+def jsDir = "${webAppDir}/static/js"
+def csDir = "${webAppDir}/static/css"
 
 war.doFirst {
 	exclude("**/static/js/**.js")
+	exclude("**/static/css/**.css")
 	tasks.jsCombineProd.execute()
 	tasks.jsMinifyProd.execute()
+	tasks.cssCombineProd.execute()
+	tasks.cssMinifyProd.execute()
 }
 
 war.webInf {
-	from (["${buildDir}/static/js/static.min.js", "${buildDir}/static/js/static.js"])
-	into "/static/js/"
+	into('/static/js/') {
+		from(["${buildDir}/static/js/static.min.js", "${buildDir}/static/js/static.js"])
+	}
+	into('/static/css/') {
+		from(["${buildDir}/static/css/static.min.css"])
+	}
 }
 
-def jsDir = "${webAppDir}/static/js"
-def pScriptsDflt = ["${jsDir}/jquery-2.2.1.js", "${jsDir}/bootstrap.js", "${jsDir}/angular.js",
-					"${jsDir}/angular-ui-router.js", "${jsDir}/angular-animate.js", "${jsDir}/loading-bar.js"];
-
 task jsCombineProd(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
-	source = [pScriptsDflt]
+	source = ["${jsDir}/jquery-2.2.3.js", "${jsDir}/bootstrap.js", "${jsDir}/bootstrap-select.js", "${jsDir}/angular.js",
+			  "${jsDir}/angular-animate.js", "${jsDir}/angular-ui-router.js", "${jsDir}/loading-bar.js"]
 	dest = file("${buildDir}/static/js/static.js")
 }
 
@@ -110,6 +119,15 @@ task jsMinifyProd(type: com.eriwen.gradle.js.tasks.MinifyJsTask) {
 	closure { warningLevel = 'QUIET' }
 }
 
-/*processResources {
-	it.dependsOn ([jsCombineProd, jsMinifyProd])
-}*/
+task cssCombineProd(type: com.eriwen.gradle.css.tasks.CombineCssTask) {
+	source = ["${csDir}/bootstrap.css", "${csDir}/bootstrap-select.css", "${csDir}/bootstrap-theme-flea.css", "${csDir}/font-awesome.css",
+			  "${csDir}/html5imageupload.css", "${csDir}/loading-bar.css", "${csDir}/parallax.css", "${csDir}/site.css"]
+	dest = file("${buildDir}/static/css/static.css")
+}
+
+task cssMinifyProd(type: com.eriwen.gradle.css.tasks.MinifyCssTask) {
+	source = file("${buildDir}/static/css/static.css")
+	dest = file("${buildDir}/static/css/static.min.css")
+	yuicompressor { /*Optional*/ lineBreakPos = -1 }
+}
+
