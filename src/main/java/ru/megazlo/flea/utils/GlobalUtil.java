@@ -2,9 +2,6 @@ package ru.megazlo.flea.utils;
 
 import java.lang.management.ManagementFactory;
 
-/**
- * @author paradoxfm - 21.01.2016
- */
 public class GlobalUtil {
 
     private static boolean debug;

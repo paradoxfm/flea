@@ -45,6 +45,8 @@ dependencies {
 	compile group: 'org.hibernate', name: 'hibernate-java8', version: verHibernate
 	compile group: 'org.hibernate', name: 'hibernate-c3p0', version: verHibernate
 	compile group: 'org.hibernate', name: 'hibernate-validator', version: verHibernateValid
+	//compile group: 'org.ehcache', name: 'ehcache', version: '3.0.1'
+	compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.2'
 
 	compile group: 'com.github.scribejava', name: 'scribejava-apis', version: verScribejava
 	compile group: 'com.github.scribejava', name: 'scribejava-core', version: verScribejava

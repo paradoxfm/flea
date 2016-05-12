@@ -1,5 +1,10 @@
 package ru.megazlo.flea.config;
 
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.ehcache.EhCacheCacheManager;
+import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
+import org.springframework.core.io.ClassPathResource;
 import ru.megazlo.flea.utils.GlobalUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.jpa.HibernatePersistenceProvider;
@@ -31,6 +36,7 @@ import java.util.Properties;
 @EnableTransactionManagement
 @ComponentScan({"ru.megazlo.flea.entity"})
 @Slf4j
+@EnableCaching
 public class SpringDataJpa {
 
     @Value("${application.use.embedded}")
@@ -67,6 +73,19 @@ public class SpringDataJpa {
         entityManagerFactoryBean.afterPropertiesSet();
         return entityManagerFactoryBean;
     }
+
+	@Bean
+	public CacheManager cacheManager() {
+		return new EhCacheCacheManager(ehCacheCacheManager().getObject());
+	}
+
+	@Bean
+	public EhCacheManagerFactoryBean ehCacheCacheManager() {
+		EhCacheManagerFactoryBean cmfb = new EhCacheManagerFactoryBean();
+		cmfb.setConfigLocation(new ClassPathResource("ehcache.xml"));
+		cmfb.setShared(true);
+		return cmfb;
+	}
 
     private Properties getProperties() {
         Properties properties = new Properties();
