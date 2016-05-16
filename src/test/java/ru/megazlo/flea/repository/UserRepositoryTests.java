@@ -32,7 +32,7 @@ public class UserRepositoryTests extends AbstractRepositoryTest {
         assertNotNull(ivUsr);
         assertNotNull(ivUsr.getRoles());
 
-        assertNotNull(ivUsr.getCreateDate());
+        assertNotNull(ivUsr.getRegisterDate());
         assertNotNull(ivUsr.getModificationTime());
         assertEquals(mUs.getId(), ivUsr.getId());
     }
