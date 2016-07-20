@@ -30,9 +30,9 @@ public class Initializer implements WebApplicationInitializer {
         dispatcher.addMapping(MAPPING_URL);
 
         // HTTPS
-        HttpConstraintElement forceHttpsConstraint = new HttpConstraintElement(ServletSecurity.TransportGuarantee.CONFIDENTIAL);
+        /*HttpConstraintElement forceHttpsConstraint = new HttpConstraintElement(ServletSecurity.TransportGuarantee.CONFIDENTIAL);
         ServletSecurityElement securityElement = new ServletSecurityElement(forceHttpsConstraint);
-        dispatcher.setServletSecurity(securityElement);
+        dispatcher.setServletSecurity(securityElement);*/
     }
 
     private void registerFilters(ServletContext servletContext) {

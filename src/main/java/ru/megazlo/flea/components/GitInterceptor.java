@@ -16,7 +16,7 @@ public class GitInterceptor extends HandlerInterceptorAdapter {
 
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
-		request.setAttribute("appVer", gitState);
+		request.setAttribute("git", gitState);
 		super.postHandle(request, response, handler, modelAndView);
 	}
 }

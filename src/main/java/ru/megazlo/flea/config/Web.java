@@ -27,9 +27,6 @@ import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 import org.thymeleaf.templateresolver.ITemplateResolver;
 
-/**
- * @author paradoxfm - 21.01.2016
- */
 @Configuration
 @EnableWebMvc
 public class Web extends WebMvcConfigurerAdapter implements ApplicationContextAware {
@@ -83,8 +80,7 @@ public class Web extends WebMvcConfigurerAdapter implements ApplicationContextAw
         SpringTemplateEngine engine = new SpringTemplateEngine();
         engine.setTemplateResolver(webTemplateResolver());
         engine.setMessageSource(messageSource);
-        SpringSecurityDialect securityDialect = new SpringSecurityDialect();
-        engine.addDialect(securityDialect);
+        engine.addDialect(new SpringSecurityDialect());
         SpringMessageResolver messageResolver = new SpringMessageResolver();
         messageResolver.setMessageSource(messageSource);
         engine.addMessageResolver(messageResolver);

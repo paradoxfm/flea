@@ -1,9 +1,6 @@
 package ru.megazlo.flea.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.scribejava.apis.FacebookApi;
-import com.github.scribejava.core.builder.ServiceBuilder;
-import com.github.scribejava.core.oauth.OAuth20Service;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.view.RedirectView;
@@ -21,7 +18,7 @@ public class OAuthController {
     public static final String STATE = "state";
 
     private String applicationHost;
-    private OAuth20Service oAuthService;
+    //private OAuth20Service oAuthService;
     // Jackson ObjectMapper
     private ObjectMapper objectMapper;
 
@@ -41,7 +38,7 @@ public class OAuthController {
         }
     }*/
 
-    @RequestMapping("/login/facebook")
+    /*@RequestMapping("/login/facebook")
     public RedirectView loginWithFacebook() {
         oAuthService = buildOAuthService(oauthProp.getProperty("oauth.facebook.clientId"), oauthProp.getProperty("oauth.facebook.clientSecret"));
         this.objectMapper = new ObjectMapper();
@@ -50,7 +47,7 @@ public class OAuthController {
         //this.objectMapper.registerModule(new AfterburnerModule());
         //details.setAccessTokenUri(oauthProp.getProperty("oauth.facebook.accessTokenUri"));
         //details.setUserAuthorizationUri(oauthProp.getProperty("oauth.facebook.userAuthorizationUri"));
-    }
+    }*/
 
     /*@RequestMapping("/auth/facebook")
     public RedirectView startAuthentication(HttpSession session) {
@@ -59,7 +56,7 @@ public class OAuthController {
         return new RedirectView(authorizationUrl);
     }*/
 
-    private OAuth20Service buildOAuthService(String clientId, String clientSecret) {
+    /*private OAuth20Service buildOAuthService(String clientId, String clientSecret) {
         // The callback must match Site-Url in the Facebook app settings
         String secretState = "secret" + new Random().nextInt(999_999);
         return new ServiceBuilder()
@@ -68,5 +65,5 @@ public class OAuthController {
                 .state(secretState)
                 .callback("http://www.example.com/oauth_callback/")
                 .build(FacebookApi.instance());
-    }
+    }*/
 }

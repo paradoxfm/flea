@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
-@Component
+@Component("git")
 @PropertySource("classpath:git.properties")
 public class GitRepositoryState {
 
@@ -22,4 +22,6 @@ public class GitRepositoryState {
 	private String version;*/
 	@Value("${git.commit.user.name}")
 	private String user;
+	@Value("${git.commit.time}")
+	private String commitTime;
 }

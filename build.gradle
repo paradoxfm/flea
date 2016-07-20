@@ -1,5 +1,6 @@
 plugins {
 	id 'com.gorylenko.gradle-git-properties' version '1.4.16'
+	//id 'com.github.robfletcher.compass" version' '2.0.6'
 	id 'com.eriwen.gradle.js' version '2.12.0'
 	id 'com.eriwen.gradle.css' version '2.12.0'
 }
@@ -7,14 +8,17 @@ plugins {
 group 'ru.megazlo'
 version 'b2'
 
+//apply plugin: "com.github.robfletcher.compass"
 apply plugin: 'com.gorylenko.gradle-git-properties'
 apply plugin: 'js'
 apply plugin: 'css'
 apply plugin: 'java'
 apply plugin: 'war'
 
-sourceCompatibility = JavaVersion.VERSION_1_8
-targetCompatibility = JavaVersion.VERSION_1_8
+allprojects {
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
+}
 
 repositories {
 	mavenLocal()
@@ -24,7 +28,6 @@ repositories {
 dependencies {
 	compile group: 'org.springframework', name: 'spring-webmvc', version: verSpring
 	compile group: 'org.springframework', name: 'spring-context-support', version: verSpring
-	//compile group: 'org.springframework', name: 'spring-tx', version: verSpring
 	compile group: 'org.springframework', name: 'spring-orm', version: verSpring
 	compile group: 'org.springframework', name: 'spring-aspects', version: verSpring
 
@@ -45,13 +48,13 @@ dependencies {
 	compile group: 'org.hibernate', name: 'hibernate-java8', version: verHibernate
 	compile group: 'org.hibernate', name: 'hibernate-c3p0', version: verHibernate
 	compile group: 'org.hibernate', name: 'hibernate-validator', version: verHibernateValid
-	compile group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.5.3.Final'
+	//compile group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.5.3.Final'
 	compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final'
 	//compile group: 'org.ehcache', name: 'ehcache', version: '3.0.1'
 	compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.2'
 
-	compile group: 'com.github.scribejava', name: 'scribejava-apis', version: verScribejava
-	compile group: 'com.github.scribejava', name: 'scribejava-core', version: verScribejava
+	//compile group: 'com.github.scribejava', name: 'scribejava-apis', version: verScribejava
+	//compile group: 'com.github.scribejava', name: 'scribejava-core', version: verScribejava
 
 	compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.2'
 
@@ -96,6 +99,7 @@ def csDir = "${webAppDir}/static/css"
 war.doFirst {
 	exclude("**/static/js/**.js")
 	exclude("**/static/css/**.css")
+	exclude("**/static/css/**.css")
 	tasks.jsCombineProd.execute()
 	tasks.jsMinifyProd.execute()
 	tasks.cssCombineProd.execute()
@@ -112,7 +116,7 @@ war.webInf {
 }
 
 task jsCombineProd(type: com.eriwen.gradle.js.tasks.CombineJsTask) {
-	source = ["${jsDir}/jquery-2.2.3.js", "${jsDir}/bootstrap.js", "${jsDir}/bootstrap-select.js", "${jsDir}/angular.js",
+	source = ["${jsDir}/jquery.js", "${jsDir}/bootstrap.js", "${jsDir}/bootstrap-select.js", "${jsDir}/angular.js",
 			  "${jsDir}/angular-animate.js", "${jsDir}/angular-ui-router.js", "${jsDir}/loading-bar.js"]
 	dest = file("${buildDir}/static/js/static.js")
 }

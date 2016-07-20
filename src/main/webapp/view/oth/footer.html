@@ -1,6 +1,6 @@
-<footer class="footer-wrap"  xmlns:th="http://www.thymeleaf.org">
+<footer class="footer-wrap" xmlns:th="http://www.thymeleaf.org">
     <div class="pull-right hidden-xs">
-        <b>Version</b> 2.3.0
+        <b>Version:</b> <th:block th:text="${git.abbrev + ' ' + git.commitTime}"/>
     </div>
     <strong>Copyright &copy; 2016 <a href="#">MegaZlo Studio</a>.</strong>
     All rights reserved.

@@ -85,9 +85,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 //.and().apply(new SpringSocialConfigurer())
                 .and().csrf().disable();
 
-        if (useSsl) {
-            http.requiresChannel().anyRequest().requiresSecure();
-        }
     }
 
     @Bean

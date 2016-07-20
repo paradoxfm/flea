@@ -9,9 +9,6 @@ import org.hibernate.validator.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-/**
- * @author iv - 25.01.2016
- */
 @Getter @Setter
 @JsonIgnoreProperties(ignoreUnknown = true)
 @FieldMatch(first = "password", second = "confirmPassword")
