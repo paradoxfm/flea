@@ -1,8 +1,8 @@
 plugins {
-	id 'com.gorylenko.gradle-git-properties' version '1.4.16'
+	id 'com.gorylenko.gradle-git-properties' version '1.4.17'
 	//id 'com.github.robfletcher.compass" version' '2.0.6'
-	id 'com.eriwen.gradle.js' version '2.12.0'
-	id 'com.eriwen.gradle.css' version '2.12.0'
+	id 'com.eriwen.gradle.js' version '2.14.1'
+	id 'com.eriwen.gradle.css' version '2.14.0'
 }
 
 group 'ru.megazlo'
@@ -32,7 +32,7 @@ dependencies {
 	compile group: 'org.springframework', name: 'spring-aspects', version: verSpring
 
 	compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: verThymeleaf
-	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: verThymeleaf
+	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: verThymeleafExt
 
 	providedCompile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.5'
 
@@ -50,8 +50,8 @@ dependencies {
 	compile group: 'org.hibernate', name: 'hibernate-validator', version: verHibernateValid
 	//compile group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.5.3.Final'
 	compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final'
-	//compile group: 'org.ehcache', name: 'ehcache', version: '3.0.1'
-	compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.2'
+	//compile group: 'org.ehcache', name: 'ehcache', version: '3.1.1'
+	compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.2.2.21'
 
 	//compile group: 'com.github.scribejava', name: 'scribejava-apis', version: verScribejava
 	//compile group: 'com.github.scribejava', name: 'scribejava-core', version: verScribejava
@@ -76,8 +76,8 @@ dependencies {
 
 	testCompile group: 'org.mockito', name: 'mockito-core', version: verMockito
 	testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
-	testCompile group: 'com.jayway.jsonpath', name: 'json-path', version: '2.1.0'
-	testCompile group: 'com.jayway.jsonpath', name: 'json-path-assert', version: '2.1.0'
+	testCompile group: 'com.jayway.jsonpath', name: 'json-path', version: verJsonpath
+	testCompile group: 'com.jayway.jsonpath', name: 'json-path-assert', version: verJsonpath
 	testCompile group: 'javax.el', name: 'javax.el-api', version: '2.2.4'
 	testCompile group: 'org.glassfish.web', name: 'javax.el', version: '2.2.4'
 

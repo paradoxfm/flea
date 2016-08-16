@@ -17,7 +17,7 @@ import java.util.Set;
 /**
  * @author paradoxfm - 21.01.2016
  */
-@Entity
+//@Entity
 @Getter
 @Setter
 @Table(name = "cards")
@@ -34,11 +34,11 @@ public class Card extends AbstractPersistable<Long> {
     private CardType cardType;
 
     @CreatedDate
-    @Column(name = "creation_time")
-    private ZonedDateTime createDate;
-    @LastModifiedDate
-    @Column(name = "modification_time")
-    private ZonedDateTime modificationTime;
+	@Column(name = "creation_time")
+	private ZonedDateTime createDate;
+	@LastModifiedDate
+	@Column(name = "modification_time")
+	private ZonedDateTime modificationTime;
 
     @OneToMany(mappedBy = "card")
     private List<CardField> fields;
