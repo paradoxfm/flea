@@ -1,11 +1,10 @@
 package ru.megazlo.flea.services.impl;
 
-import ru.megazlo.flea.components.UserAccessor;
-import ru.megazlo.flea.entity.Card;
-import ru.megazlo.flea.repositories.CardRepository;
-import ru.megazlo.flea.services.ICardService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.megazlo.flea.components.UserAccessor;
+import ru.megazlo.flea.entity.Card;
+import ru.megazlo.flea.services.ICardService;
 
 import java.util.List;
 
@@ -15,15 +14,15 @@ import java.util.List;
 @Service
 public class CardService implements ICardService {
 
-    @Autowired
-    private CardRepository cardRepository;
+    /*@Autowired
+    private CardRepository cardRepository;*/
 
     @Autowired
     private UserAccessor userAccessor;
 
     @Override
     public List<Card> getMyCards() {
-        return cardRepository.findMyCards(userAccessor.getUser().getUsername());
+        return null;// cardRepository.findMyCards(userAccessor.getUser().getUsername());
     }
 
     @Override

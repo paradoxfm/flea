@@ -1,7 +1,7 @@
 package ru.megazlo.flea.entity.enums;
 
 import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.usertype.UserType;
 
 import java.io.Serializable;
@@ -27,10 +27,20 @@ class EnumUserType<K, E extends Enum<E> & IValueEnum<K>> implements UserType {
 	}
 
 	@Override
-	public Object nullSafeGet(ResultSet resultSet, String[] names, SessionImplementor sessionImplementor, Object o) throws HibernateException, SQLException {
-		K value = (K) resultSet.getObject(names[0]);
-		return !resultSet.wasNull() ? findMappedConstant(value) : null;
+	public Object nullSafeGet(ResultSet rs, String[] names, SharedSessionContractImplementor session, Object owner) throws HibernateException, SQLException {
+		K value = (K) rs.getObject(names[0]);
+		return !rs.wasNull() ? findMappedConstant(value) : null;
 	}
+
+	@Override
+	public void nullSafeSet(PreparedStatement st, Object value, int index, SharedSessionContractImplementor session) throws HibernateException, SQLException {
+		if (null == value) {
+			st.setNull(index, Types.OTHER);
+		} else {
+			st.setObject(index, ((E) value).getVal());
+		}
+	}
+
 
 	private E findMappedConstant(K val) {
 		for (E e : clazz.getEnumConstants()) {
@@ -39,15 +49,6 @@ class EnumUserType<K, E extends Enum<E> & IValueEnum<K>> implements UserType {
 			}
 		}
 		return null;
-	}
-
-	@Override
-	public void nullSafeSet(PreparedStatement prepStat, Object value, int index, SessionImplementor sessionImpl) throws HibernateException, SQLException {
-		if (null == value) {
-			prepStat.setNull(index, Types.OTHER);
-		} else {
-			prepStat.setObject(index, ((E) value).getVal());
-		}
 	}
 
 	public Class returnedClass() {

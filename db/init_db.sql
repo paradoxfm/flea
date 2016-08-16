@@ -5,10 +5,11 @@ lc_collate = 'Russian_Russia.1251'
 lc_ctype = 'Russian_Russia.1251'
 connection limit = -1;
 
-create schema fle;
+--create schema fle;
+--set search_path = fle;--выбор схемы по умолчанию
 
 -- таблица для хранения сессии пользователей
-create table fle.fl_persistent_login (
+create table fl_persistent_login (
 	series character varying(64) not null,
 	last_used timestamp without time zone,
 	token character varying(64),
@@ -17,7 +18,7 @@ create table fle.fl_persistent_login (
 );
 
 -- таблица пользователей системы
-create table fle.fl_users (
+create table fl_users (
 	id bigserial,
 	email character varying(100) not null,
 	login character varying(14) not null,
@@ -31,26 +32,27 @@ create table fle.fl_users (
 
 -- таблица для привязки ролей к пользователям
 -- todo: есть мнение что нужны роли и разрешения для ролей
-create table fle.fl_user_roles (
+create table fl_user_roles (
 	userid bigint not null,
 	rolename character varying(255) not null,
 	constraint user_roles_pkey primary key (userid, rolename),
-	constraint user_fk_user_roles foreign key (userid) references fle.fl_users (id) match simple on delete cascade
+	constraint user_fk_user_roles foreign key (userid) references fl_users (id) match simple on delete cascade
 );
 
 -- таблица объявлений
-create table fle.fl_advert (
+create table fl_advert (
 	id bigserial,
 	userid bigint not null,
 	title character varying(300),
 	full_text text,
+	keywords character varying(500),
 	tsv tsvector,
 	constraint advert_pkey primary key (id),
-	constraint fk_advert_user foreign key (userid) references fle.fl_users (id) match simple on delete cascade
+	constraint fk_advert_user foreign key (userid) references fl_users (id) match simple on delete cascade
 );
-create index fl_advert_fts_idx on fle.fl_advert using gin(tsv);
+create index fl_advert_fts_idx on fl_advert using gin(tsv);
 
-create table fle.fl_address (
+create table fl_address (
 	id bigserial,
 	type smallint,
 	zip character varying(20),

@@ -6,12 +6,9 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.AbstractPersistable;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.time.ZonedDateTime;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,18 +17,14 @@ import java.util.Set;
 //@Entity
 @Getter
 @Setter
-@Table(name = "cards")
-@EntityListeners({AuditingEntityListener.class})
+//@Table(name = "cards")
+//@EntityListeners({AuditingEntityListener.class})
 public class Card extends AbstractPersistable<Long> {
 
     @Column
     private String name;
     @Column
     private String comment;
-    @Enumerated(EnumType.STRING)
-    @Column(name = "card_type", nullable = false)
-    @NotNull
-    private CardType cardType;
 
     @CreatedDate
 	@Column(name = "creation_time")
@@ -39,9 +32,6 @@ public class Card extends AbstractPersistable<Long> {
 	@LastModifiedDate
 	@Column(name = "modification_time")
 	private ZonedDateTime modificationTime;
-
-    @OneToMany(mappedBy = "card")
-    private List<CardField> fields;
 
     @CreatedBy
     @ManyToOne(fetch = FetchType.LAZY)

@@ -18,11 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "users", indexes = {
-		@Index(columnList = "login", name = "user_login_idx"),
-		@Index(columnList = "password_hash", name = "user_password_idx"),
-		@Index(columnList = "register_date", name = "user_register_idx")
-})
+@Table(name = "users")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EntityListeners({AuditingEntityListener.class})
 /*@FetchProfile(name = "usr-with-role", fetchOverrides = {
@@ -49,14 +45,14 @@ public class User extends AbstractPersistable<Long> {
 	@Pattern(regexp = "(^$|[0-9]{10})")
 	private String phoneNumber;
 
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
+	/*@OneToMany(fetch = FetchType.LAZY, mappedBy = "owner")
 	private Set<Card> created;
 
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinTable(name = "user_cards", joinColumns = {
 			@JoinColumn(name = "userId", nullable = false, updatable = false)},
 			inverseJoinColumns = {@JoinColumn(name = "cardId", nullable = false, updatable = false)})
-	private Set<Card> cards;
+	private Set<Card> cards;*/
 
 	@Enumerated(EnumType.STRING)
 	@ElementCollection(targetClass = RoleEnum.class)

@@ -33,7 +33,7 @@ public class InitService implements IInitService, ApplicationListener<ContextRef
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         if (GlobalUtil.isDebug()) {
-            addAdminIfNeed();
+            //addAdminIfNeed();
         }
     }
 
