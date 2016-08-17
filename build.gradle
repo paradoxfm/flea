@@ -56,6 +56,8 @@ dependencies {
 	//compile group: 'com.github.scribejava', name: 'scribejava-apis', version: verScribejava
 	//compile group: 'com.github.scribejava', name: 'scribejava-core', version: verScribejava
 
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '0.7.6'
+	//compile group: 'org.modelmapper.extensions', name: 'modelmapper-spring', version: '0.7.6'
 	compile group: 'commons-beanutils', name: 'commons-beanutils', version: '1.9.2'
 
 	compile group: 'javax.servlet', name: 'jstl', version: '1.2'

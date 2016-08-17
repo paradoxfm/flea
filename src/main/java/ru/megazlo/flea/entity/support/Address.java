@@ -14,7 +14,7 @@ import javax.persistence.Table;
 /** Created by iGurkin on 16.08.2016. */
 @Getter
 @Setter
-@Table(name = "fl_address", schema = "fle")
+@Table(name = "fl_address")
 @TypeDef(name = "addressTypeHib", typeClass = AddressTypeHib.class)
 public class Address extends AbstractPersistable<Long> {
 

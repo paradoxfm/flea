@@ -33,22 +33,39 @@ create table fl_users (
 -- таблица для привязки ролей к пользователям
 -- todo: есть мнение что нужны роли и разрешения для ролей
 create table fl_user_roles (
-	userid bigint not null,
+	user_id bigint not null,
 	rolename character varying(255) not null,
-	constraint user_roles_pkey primary key (userid, rolename),
-	constraint user_fk_user_roles foreign key (userid) references fl_users (id) match simple on delete cascade
+	constraint user_roles_pkey primary key (user_id, rolename),
+	constraint user_fk_user_roles foreign key (user_id) references fl_users (id) match simple on delete cascade
+);
+
+-- категории объявлений
+create table fl_advert_cat (
+	id bigserial,
+	end_cat boolean,-- конечная категория, те та с которая идет в объявление
+	title character varying(100),
+	constraint fl_advert_cat_pkey primary key (id)
+);
+
+create table fl_advert_cat_tree (
+	ancestor_id bigint,
+	descendant_id bigint,
+	level smallint,
+	"order" smallint
 );
 
 -- таблица объявлений
 create table fl_advert (
 	id bigserial,
-	userid bigint not null,
+	cat_id bigint,
+	user_id bigint not null,
 	title character varying(300),
 	full_text text,
 	keywords character varying(500),
 	tsv tsvector,
 	constraint advert_pkey primary key (id),
-	constraint fk_advert_user foreign key (userid) references fl_users (id) match simple on delete cascade
+	constraint fk_advert_owner foreign key (user_id) references fl_users (id) match simple on delete cascade,
+	constraint fk_advert_cat foreign key (cat_id) references fl_advert_cat (id) match simple on delete cascade
 );
 create index fl_advert_fts_idx on fl_advert using gin(tsv);
 

@@ -1,5 +1,6 @@
 package ru.megazlo.flea.config;
 
+import org.modelmapper.ModelMapper;
 import ru.megazlo.flea.utils.GlobalUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.beans.factory.config.PropertiesFactoryBean;
@@ -24,78 +25,83 @@ import java.util.Properties;
 @Configuration
 @EnableAsync
 @ComponentScan({"ru.megazlo.flea.services", "ru.megazlo.flea.repositories",
-        "ru.megazlo.flea.controllers", "ru.megazlo.flea.components"})
+		"ru.megazlo.flea.controllers", "ru.megazlo.flea.components"})
 @PropertySource("classpath:application.properties")
 public class SpringContext {
 
-    private static final int MESSAGE_CACHE_TIME_YEAR = 31_536_000;
+	private static final int MESSAGE_CACHE_TIME_YEAR = 31_536_000;
 
-    @Value("${application.mail.host}")
-    private String mailHost;
-    @Value("${application.mail.port}")
-    private int mailPort;
-    @Value("${application.mail.user}")
-    private String mailUser;
-    @Value("${application.mail.password}")
-    private String mailPassword;
+	@Value("${application.mail.host}")
+	private String mailHost;
+	@Value("${application.mail.port}")
+	private int mailPort;
+	@Value("${application.mail.user}")
+	private String mailUser;
+	@Value("${application.mail.password}")
+	private String mailPassword;
 
-    @Bean(name = "oauthProp")
-    public PropertiesFactoryBean getProperties() {
-        PropertiesFactoryBean rez = new PropertiesFactoryBean();
-        rez.setLocation(new ClassPathResource("/oauth.properties"));
-        return rez;
-    }
+	@Bean(name = "oauthProp")
+	public PropertiesFactoryBean getProperties() {
+		PropertiesFactoryBean rez = new PropertiesFactoryBean();
+		rez.setLocation(new ClassPathResource("/oauth.properties"));
+		return rez;
+	}
 
-    @Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
-        return new PropertySourcesPlaceholderConfigurer();
-    }
+	@Bean
+	public ModelMapper modelMapper() {
+		return new ModelMapper();
+	}
 
-    @Bean(name = "localValidator")
-    public Validator getLocalValidator(MessageSource messageSource) {
-        LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
-        validator.setValidationMessageSource(messageSource);
-        return validator;
-    }
+	@Bean
+	public static PropertySourcesPlaceholderConfigurer propertyConfigInDev() {
+		return new PropertySourcesPlaceholderConfigurer();
+	}
 
-    @Bean
-    public MessageSource messageSource() {
-        ResourceBundleMessageSource messages = new ResourceBundleMessageSource();
-        messages.setBasenames("i18n/messages", "i18n/validation", "i18n/mail");
-        messages.setCacheSeconds(GlobalUtil.isDebug() ? 5 : MESSAGE_CACHE_TIME_YEAR);
-        messages.setDefaultEncoding("UTF-8");
-        return messages;
-    }
+	@Bean(name = "localValidator")
+	public Validator getLocalValidator(MessageSource messageSource) {
+		LocalValidatorFactoryBean validator = new LocalValidatorFactoryBean();
+		validator.setValidationMessageSource(messageSource);
+		return validator;
+	}
 
-    @Bean
-    public JavaMailSenderImpl getMailSender() {
-        try {
-            Context initCtx = new InitialContext();
-            Context envCtx = (Context) initCtx.lookup("java:comp/env");//jndi в tomcat_home/conf/context.xml
-            JavaMailSenderImpl re1 = new JavaMailSenderImpl();
-            javax.mail.Session session = (javax.mail.Session) envCtx.lookup("mail/Session");
-            re1.setSession(session);
-            return re1;//(JavaMailSenderImpl) envCtx.lookup("mail/Session");
-        } catch (NamingException ignored) {
-        }
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messages = new ResourceBundleMessageSource();
+		messages.setBasenames("i18n/messages", "i18n/validation", "i18n/mail");
+		messages.setCacheSeconds(GlobalUtil.isDebug() ? 5 : MESSAGE_CACHE_TIME_YEAR);
+		messages.setDefaultEncoding("UTF-8");
+		return messages;
+	}
 
-        JavaMailSenderImpl rez = new JavaMailSenderImpl();
-        rez.setHost(mailHost);
-        rez.setPort(mailPort);
-        rez.setUsername(mailUser);
-        rez.setPassword(mailPassword);
-        rez.setJavaMailProperties(getMailProperties());
-        return rez;
-    }
+	@Bean
+	public JavaMailSenderImpl getMailSender() {
+		try {
+			Context initCtx = new InitialContext();
+			Context envCtx = (Context) initCtx.lookup("java:comp/env");//jndi в tomcat_home/conf/context.xml
+			JavaMailSenderImpl re1 = new JavaMailSenderImpl();
+			javax.mail.Session session = (javax.mail.Session) envCtx.lookup("mail/Session");
+			re1.setSession(session);
+			return re1;//(JavaMailSenderImpl) envCtx.lookup("mail/Session");
+		} catch (NamingException ignored) {
+		}
 
-    private Properties getMailProperties() {
-        Properties properties = new Properties();
-        properties.put("mail.transport.protocol", "smtp");
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        if (GlobalUtil.isDebug()) {
-            properties.put("mail.debug", "true");
-        }
-        return properties;
-    }
+		JavaMailSenderImpl rez = new JavaMailSenderImpl();
+		rez.setHost(mailHost);
+		rez.setPort(mailPort);
+		rez.setUsername(mailUser);
+		rez.setPassword(mailPassword);
+		rez.setJavaMailProperties(getMailProperties());
+		return rez;
+	}
+
+	private Properties getMailProperties() {
+		Properties properties = new Properties();
+		properties.put("mail.transport.protocol", "smtp");
+		properties.put("mail.smtp.auth", "true");
+		properties.put("mail.smtp.starttls.enable", "true");
+		if (GlobalUtil.isDebug()) {
+			properties.put("mail.debug", "true");
+		}
+		return properties;
+	}
 }
