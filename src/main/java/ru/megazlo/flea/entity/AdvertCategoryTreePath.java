@@ -15,7 +15,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "fl_advert_cat_tree")
 @IdClass(CompositeAdvertCategoryTreePathId.class)
-public class AdvertCategoryTreePath extends AbstractPersistable<Long> implements TreePath {
+public class AdvertCategoryTreePath implements TreePath {
 	@Id
 	@ManyToOne(targetEntity = AdvertCategory.class)
 	@JoinColumn(name = "ancestor_id", nullable = false)
@@ -26,9 +26,9 @@ public class AdvertCategoryTreePath extends AbstractPersistable<Long> implements
 	@JoinColumn(name = "descendant_id", nullable = false)
 	private ClosureTableTreeNode child;
 
-	@Column(name = "level", nullable = false)
+	@Column(name = "level_tree", nullable = false)
 	private int level;
 
-	@Column(name = "order")
+	@Column(name = "order_tree")
 	private int orderIndex;
 }

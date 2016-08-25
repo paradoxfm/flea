@@ -12,8 +12,7 @@ begin
 end;
 $$ language plpgsql;
 
-create trigger trg_ins_category_closure
-before insert on fl_advert_cat for each row execute procedure fl_advert_cat_ins();
+create trigger trg_ins_category_closure before insert on fl_advert_cat for each row execute procedure fl_advert_cat_ins();
 
 -- триггер для обновления полнотекстового поиска
 create or replace function fl_advert_ins_upd() returns trigger as $$
@@ -27,5 +26,4 @@ begin
 end;
 $$ language plpgsql;
 
-create trigger trg_upd_ins_advert
-before insert or update on fl_advert for each row execute procedure fl_advert_ins_upd();
+create trigger trg_upd_ins_advert before insert or update on fl_advert for each row execute procedure fl_advert_ins_upd();

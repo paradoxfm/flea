@@ -18,7 +18,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
+@Table(name = "fl_users")
 @JsonIgnoreProperties(ignoreUnknown = true)
 @EntityListeners({AuditingEntityListener.class})
 /*@FetchProfile(name = "usr-with-role", fetchOverrides = {

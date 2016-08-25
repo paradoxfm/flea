@@ -34,7 +34,9 @@ dependencies {
 	compile group: 'org.thymeleaf', name: 'thymeleaf-spring4', version: verThymeleaf
 	compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity4', version: verThymeleafExt
 
-	providedCompile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.5'
+	providedCompile group: 'javax.mail', name: 'javax.mail-api', version: '1.5.6'
+	// https://mvnrepository.com/artifact/com.sun.mail/javax.mail
+	compile group: 'com.sun.mail', name: 'javax.mail', version: '1.5.6'//impl
 
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: verJackson
 	compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: verJackson
@@ -44,12 +46,10 @@ dependencies {
 	compile group: 'org.springframework.security', name: 'spring-security-web', version: verSecurity
 	compile group: 'org.springframework.security', name: 'spring-security-config', version: verSecurity
 
-	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: verHibernate
 	compile group: 'org.hibernate', name: 'hibernate-java8', version: verHibernate
 	compile group: 'org.hibernate', name: 'hibernate-c3p0', version: verHibernate
 	compile group: 'org.hibernate', name: 'hibernate-validator', version: verHibernateValid
 	//compile group: 'org.hibernate', name: 'hibernate-search-orm', version: '5.5.3.Final'
-	compile group: 'org.hibernate.javax.persistence', name: 'hibernate-jpa-2.1-api', version: '1.0.0.Final'
 	//compile group: 'org.ehcache', name: 'ehcache', version: '3.1.1'
 	compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.2.2.21'
 

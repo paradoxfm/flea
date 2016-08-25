@@ -8,69 +8,78 @@ connection limit = -1;
 --create schema fle;
 --set search_path = fle;--выбор схемы по умолчанию
 
+-- расширение для case ignore строк
+create extension citext;
+
 -- таблица для хранения сессии пользователей
 create table fl_persistent_login (
-	series character varying(64) not null,
+	series character varying(64) primary key,
 	last_used timestamp without time zone,
 	token character varying(64),
-	username character varying(64),
-	constraint persistent_login_pkey primary key (series)
+	username character varying(64)
 );
+create unique index fl_persistent_login_id_idx on fl_persistent_login (series);
 
 -- таблица пользователей системы
 create table fl_users (
-	id bigserial,
-	email character varying(100) not null,
+	id bigserial primary key,
+	email citext not null unique,
 	login character varying(14) not null,
 	modification_time timestamp without time zone,
 	name character varying(150),
 	password_hash character varying(255) not null,
 	user_prone_num character varying(10),
-	register_date timestamp without time zone not null,
-	constraint users_pkey primary key (id)
+	register_date timestamp without time zone not null
 );
+create unique index fl_users_id_idx on fl_users (id);
+create unique index fl_users_email_idx on fl_users (email);
+create unique index fl_users_login_idx on fl_users (login);
 
 -- таблица для привязки ролей к пользователям
 -- todo: есть мнение что нужны роли и разрешения для ролей
 create table fl_user_roles (
-	user_id bigint not null,
+	user_id bigint not null references fl_users on delete cascade,
 	rolename character varying(255) not null,
-	constraint user_roles_pkey primary key (user_id, rolename),
-	constraint user_fk_user_roles foreign key (user_id) references fl_users (id) match simple on delete cascade
+	constraint user_roles_pkey primary key (user_id, rolename)
 );
+create index fl_user_roles_user_id_idx on fl_user_roles (user_id);
 
 -- категории объявлений
 create table fl_advert_cat (
-	id bigserial,
+	id bigserial primary key,
+	parent_id bigint references fl_advert_cat on delete cascade,
 	end_cat boolean,-- конечная категория, те та с которая идет в объявление
-	title character varying(100),
-	constraint fl_advert_cat_pkey primary key (id)
+	title character varying(100)
 );
+create unique index fl_advert_cat_id_idx on fl_advert_cat (id);
+create index fl_advert_parent_id_idx on fl_advert_cat (parent_id);
 
 create table fl_advert_cat_tree (
-	ancestor_id bigint,
-	descendant_id bigint,
-	level smallint,
+	ancestor_id bigint references fl_advert_cat,
+	descendant_id bigint references fl_advert_cat,
+	level smallint check (level > 0),
 	"order" smallint
 );
+create index fl_advert_cat_tree_ancestor_idx on fl_advert_cat_tree (ancestor_id);
+create index fl_advert_cat_tree_descendant_idx on fl_advert_cat_tree (descendant_id);
 
 -- таблица объявлений
 create table fl_advert (
-	id bigserial,
-	cat_id bigint,
-	user_id bigint not null,
+	id bigserial primary key,
+	cat_id bigint references fl_advert_cat on delete cascade,
+	user_id bigint not null references fl_users on delete cascade,
 	title character varying(300),
 	full_text text,
 	keywords character varying(500),
-	tsv tsvector,
-	constraint advert_pkey primary key (id),
-	constraint fk_advert_owner foreign key (user_id) references fl_users (id) match simple on delete cascade,
-	constraint fk_advert_cat foreign key (cat_id) references fl_advert_cat (id) match simple on delete cascade
+	tsv tsvector
 );
+create unique index fl_advert_id_idx on fl_advert (id);
 create index fl_advert_fts_idx on fl_advert using gin(tsv);
+create index fl_advert_fk_cat_id_idx on fl_advert (id);
+create index fl_advert_user_id_idx on fl_advert (id);
 
 create table fl_address (
-	id bigserial,
+	id bigserial primary key,
 	type smallint,
 	zip character varying(20),
 	kladr character varying(60),
@@ -85,6 +94,6 @@ create table fl_address (
 	korp character varying(10),
 	build character varying(10),
 	flat smallint,
-	comment text,
-	constraint fl_address_pkey primary key (id)
+	comment text
 );
+create unique index fl_address_id_idx on fl_address (id);

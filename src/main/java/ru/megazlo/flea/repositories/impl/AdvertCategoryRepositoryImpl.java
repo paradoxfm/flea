@@ -13,7 +13,7 @@ import javax.persistence.Query;
 /** Created by iGurkin on 17.08.2016. */
 @Repository
 @Transactional
-public class AdvertCategoryImpl implements AdvertCategoryCustom {
+public class AdvertCategoryRepositoryImpl implements AdvertCategoryCustom {
 
 	@PersistenceContext
 	private EntityManager em;

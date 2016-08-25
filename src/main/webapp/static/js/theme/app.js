@@ -405,18 +405,18 @@ function _init() {
       }
       //If the menu is not visible
       else if ((checkElement.is('.treeview-menu')) && (!checkElement.is(':visible'))) {
-        //Get the parent menu
+        //Get the parentId menu
         var parent = $this.parents('ul').first();
-        //Close all open menus within the parent
+        //Close all open menus within the parentId
         var ul = parent.find('ul:visible').slideUp(animationSpeed);
-        //Remove the menu-open class from the parent
+        //Remove the menu-open class from the parentId
         ul.removeClass('menu-open');
-        //Get the parent li
+        //Get the parentId li
         var parent_li = $this.parent("li");
 
         //Open the target menu and add the menu-open class
         checkElement.slideDown(animationSpeed, function () {
-          //Add the class active to the parent li
+          //Add the class active to the parentId li
           checkElement.addClass('menu-open');
           parent.find('li.active').removeClass('active');
           parent_li.addClass('active');
@@ -556,7 +556,7 @@ function _init() {
     },
     collapse: function (element) {
       var _this = this;
-      //Find the box parent
+      //Find the box parentId
       var box = element.parents(".box").first();
       //Find the body and the footer
       var box_content = box.find("> .box-body, > .box-footer, > form  >.box-body, > form > .box-footer");
@@ -581,7 +581,7 @@ function _init() {
       }
     },
     remove: function (element) {
-      //Find the box parent
+      //Find the box parentId
       var box = element.parents(".box").first();
       box.slideUp(this.animationSpeed);
     }

@@ -1,9 +1,10 @@
 package ru.megazlo.flea.repository;
 
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 import ru.megazlo.flea.entity.RoleEnum;
 import ru.megazlo.flea.entity.User;
 import ru.megazlo.flea.repositories.UserRepository;
-import org.hibernate.LazyInitializationException;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.TransactionSystemException;
@@ -12,25 +13,26 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 
 /**
  * @author paradoxfm - 17.02.2016
  */
+@Transactional
 public class UserRepositoryTests extends AbstractRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
 
     @Test
+	@Rollback
     public void registrationMinimalFieldsTest() {
         User mUs = createMinimalUser();
         userRepository.save(mUs);
         userRepository.flush();
         User ivUsr = userRepository.findUserByLogin("ivan");
         assertNotNull(ivUsr);
-        assertNotNull(ivUsr.getRoles());
+        assertNull(ivUsr.getRoles());
 
         assertNotNull(ivUsr.getRegisterDate());
         assertNotNull(ivUsr.getModificationTime());
@@ -38,6 +40,7 @@ public class UserRepositoryTests extends AbstractRepositoryTest {
     }
 
     @Test
+	@Rollback
     public void fullFieldsTest() {
         User mUs = createMinimalUser();
         userRepository.save(mUs);
@@ -46,16 +49,18 @@ public class UserRepositoryTests extends AbstractRepositoryTest {
         assertEquals("ivan", u.getLogin());
     }
 
-    @Test(expected = LazyInitializationException.class)
+    @Test
+	@Rollback
     public void failLazyTest() {
         User mUs = createMinimalUser();
         userRepository.save(mUs);
         userRepository.flush();
         User ivUsr = userRepository.findUserByLogin("ivan");
-        assertEquals(0, ivUsr.getRoles().size());
+        assertNull(ivUsr.getRoles());
     }
 
     @Test
+	@Rollback
     public void findWithRoleTest() {
         User mUs = createMinimalUser();
         Set<RoleEnum> roles = new HashSet<>(Arrays.asList(RoleEnum.EXTEND_USER, RoleEnum.ORGANISATION));
@@ -67,7 +72,8 @@ public class UserRepositoryTests extends AbstractRepositoryTest {
         assertEquals(2, ivUsr.getRoles().size());
     }
 
-    @Test(expected = TransactionSystemException.class)
+    @Test//(expected = TransactionSystemException.class)
+	@Rollback
     public void failInsertTest() {
         User mUs = createMinimalUser();
         mUs.setEmail("df");

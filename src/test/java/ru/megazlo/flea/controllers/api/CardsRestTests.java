@@ -3,7 +3,6 @@ package ru.megazlo.flea.controllers.api;
 import ru.megazlo.flea.controllers.AbstractControllerTest;
 import ru.megazlo.flea.controllers.rest.CardsRest;
 import ru.megazlo.flea.entity.Card;
-import ru.megazlo.flea.entity.CardType;
 import ru.megazlo.flea.services.ICardService;
 import org.junit.After;
 import org.junit.Test;
@@ -96,7 +95,7 @@ public class CardsRestTests extends AbstractControllerTest<CardsRest> {
     @Test
     public void saveUpdateValidationTest() throws Exception {
         Card card = createCards().get(0);
-        card.setCardType(null);//обламываем валидацию
+        //card.setCardType(null);//обламываем валидацию
         when(cardService.saveUpdate(any(Card.class))).thenReturn(card);//на уровне mock сервиса происходит подмена
 
         mockMvc.perform(post("/api/cards/save")
@@ -116,7 +115,7 @@ public class CardsRestTests extends AbstractControllerTest<CardsRest> {
             Card c = new Card();
             c.setName("c" + i);
             c.setComment("comnt" + i);
-            c.setCardType(CardType.EAST);
+            //c.setCardType(CardType.EAST);
             rez.add(c);
         }
         return rez;

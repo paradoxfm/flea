@@ -459,7 +459,7 @@
                     widget.removeClass('pull-right');
                 }
 
-                // find the first parent element that has a relative css positioning
+                // find the first parentId element that has a relative css positioning
                 if (parent.css('position') !== 'relative') {
                     parent = parent.parents().filter(function () {
                         return $(this).css('position') === 'relative';
